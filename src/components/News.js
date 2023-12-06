@@ -10,8 +10,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import { Grid } from "@mui/material";
 import NewsDetails from "../components/NewsDetails";
-import { doc, setDoc } from "firebase/firestore";
-import { database } from "./firebase";
+import { pink } from "@mui/material/colors";
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -24,14 +24,12 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function News({ news, id }) {
-  const addToFavHandler = async (news) => {
+  const [fav, setFav] = React.useState(false);
+  const addToFavHandler = (news) => {
     const curUser = localStorage.getItem("current-user");
-    await setDoc(doc(database, curUser, "LA"), {
-      name: "Los Angeles",
-      state: "CA",
-      country: "USA",
-    });
+    setFav(!fav);
   };
+
   return (
     <Card
       sx={{ maxWidth: 345, minHeight: 500 }}
@@ -72,7 +70,11 @@ export default function News({ news, id }) {
                 addToFavHandler(news);
               }}
             >
-              <FavoriteIcon />
+              {fav ? (
+                <FavoriteIcon sx={{ color: pink[500] }} />
+              ) : (
+                <FavoriteIcon />
+              )}
             </IconButton>
             <IconButton aria-label="share">
               <ShareIcon />

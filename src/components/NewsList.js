@@ -3,18 +3,17 @@ import News from "../components/News";
 import axios from "axios";
 import { Grid } from "@mui/material";
 
-const NewsList = () => {
+const NewsList = ({ category }) => {
   const [article, setArticles] = useState([]);
   useEffect(() => {
     getNews();
-  }, []);
+  }, [category]);
   const getNews = () => {
     axios(
-      "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=ca7eb5a936f147de9beb487aaf5b7961"
+      `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=ca7eb5a936f147de9beb487aaf5b7961`
     )
       .then((res) => {
         setArticles(res.data.articles);
-        // console.log(res.data.articles);
       })
       .catch((err) => {
         console.log(err);
