@@ -38,6 +38,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
+  const refresh = () => window.location.reload(true);
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -53,6 +54,7 @@ export default function SignIn() {
         console.log(data, "authData");
         localStorage.setItem("current-user", data.user.uid);
         navigate("/");
+        refresh();
       })
       .catch((err) => {
         alert(err.code);

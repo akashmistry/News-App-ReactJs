@@ -50,6 +50,7 @@ export default function SignUp() {
     createUserWithEmailAndPassword(database, email, password)
       .then((data) => {
         console.log(data);
+
         navigate("/signin");
       })
       .catch((err) => {

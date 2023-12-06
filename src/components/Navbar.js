@@ -27,11 +27,13 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const refresh = () => window.location.reload(true);
 
   const signoutHandler = () => {
     signOut(database).then((val) => {
       console.log(val);
       localStorage.removeItem("current-user");
+      refresh();
     });
   };
   return (
